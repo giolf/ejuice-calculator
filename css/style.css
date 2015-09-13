@@ -1,0 +1,11 @@
+.left-side {
+	width: 76px;
+}
+
+.alert-nbl {
+	margin-bottom: 0px;
+	margin-top: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 12px;
+}

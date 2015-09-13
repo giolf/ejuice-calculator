@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg:grunt.file.readJSON('package.json'),
 		cssmin: {
-			target: {
+			css: {
 				files: [{
 					expand: true,
 					cwd: 'css',
@@ -13,12 +13,21 @@ module.exports = function(grunt) {
 			}
 		},
 		uglify: {
-			target: {
+			js: {
 				files: [{
 					expand: true,
 					cwd: 'js',
 					src: ['*.js', '!*.min.js'],
 					dest: 'js',
+					ext: '.min.js'
+				}]
+			},
+			controllers: {
+				files: [{
+					expand: true,
+					cwd: 'controllers',
+					src: ['*.js', '!*.min.js'],
+					dest: 'controllers',
 					ext: '.min.js'
 				}]
 			}
@@ -27,13 +36,17 @@ module.exports = function(grunt) {
 			options: {
 				livereload: true 
 			},
-			cssmin: {
+			css: {
 				files: ['css/*.css', '!css/*.min.css'],
-				tasks: ['cssmin']
+				tasks: ['cssmin:css']
 			},
-			uglify: {
+			js: {
 				files: ['js/*.js', '!js/*.min.js'],
-				tasks: ['uglify']
+				tasks: ['uglify:js']
+			},
+			controllers: {
+				files: ['controllers/*.js', '!controllers/*.min.js'],
+				tasks: ['uglify:controllers']
 			}
 		},
 		express: {
