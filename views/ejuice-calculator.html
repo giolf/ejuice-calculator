@@ -1,89 +1,132 @@
 <div class="row" ng-controller="ejcalc">
 
-	<div class="col-xs-12 col-sm-12 col-md-3 lg-3">
+	<div class="col-xs-12 col-sm-6 col-md-3 lg-3">
+
 		<div class="panel panel-primary" ng-form="nblF">
+
 			<div class="panel-heading">
 				<h3 class="panel-title">Nicotine base liquid</h3>
 			</div>
+
 			<ul class="list-group">
+
 				<li class="list-group-item">
+
 					<div class="input-group nbl-input" ng-class="{'has-error' : !nblF.pg.$valid }">
 						<div class="input-group-addon left-side">PG</div>
 						<input type="number" class="form-control text-right" name="pg" min="0" max="100" step="1" ng-model="nblP.pg" required>
-						<div class="input-group-addon">%</div>
+						<div class="input-group-addon">
+							<span class="right-side">%</span>
+						</div>
 					</div>
+
 					<div class="alert alert-danger alert-nbl" role="alert" ng-hide="nblF.pg.$valid">
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span>
-						insert a value between 0 and 100
+						<span class="sr-only">Error:</span> insert a value between 0 and 100
 					</div>
+
 				</li>
+
 				<li class="list-group-item">
+
 					<div class="input-group nbl-input" ng-class="{'has-error' : !nblF.vg.$valid }">
 						<div class="input-group-addon left-side">VG</div>
 						<input type="number" class="form-control text-right" name="vg" min="0" max="100" step="1" ng-model="nblP.vg" required>
-						<div class="input-group-addon">%</div>
+						<div class="input-group-addon">
+							<span class="right-side">%</span>
+						</div>
 					</div>
+
 					<div class="alert alert-danger alert-nbl" role="alert" ng-hide="nblF.vg.$valid">
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span>
-						insert a value between 0 and 100
+						<span class="sr-only">Error:</span> insert a value between 0 and 100
 					</div>
+
 				</li>
+
 				<li class="list-group-item">
+
 					<div class="input-group nbl-input" ng-class="{'has-error' : !nblF.water.$valid }">
 						<div class="input-group-addon left-side">Water</div>
 						<input type="number" class="form-control text-right" name="water" min="0" max="100" step="1" ng-model="nblP.water" required>
-						<div class="input-group-addon">%</div>
+						<div class="input-group-addon">
+							<span class="right-side">%</span>
+						</div>
 					</div>
+
 					<div class="alert alert-danger alert-nbl" role="alert" ng-hide="nblF.water.$valid">
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span>
-						insert a value between 0 and 100
+						<span class="sr-only">Error:</span> insert a value between 0 and 100
 					</div>
+
 				</li>
+
 				<li class="list-group-item">
+
 					<div class="input-group nbl-input" ng-class="{'has-error' : !nblF.nicotine.$valid }">
 						<div class="input-group-addon left-side">Nicotine</div>
 						<input type="number" class="form-control text-right" name="nicotine" min="0" max="100" step="1" ng-model="nblP.nicotine" required>
-						<div class="input-group-addon">%</div>
+						<div class="input-group-addon">
+							<span class="right-side-nicotine">
+								<sup>mg</sup>/<sub>ml</sub>
+							</span>
+						</div>
 					</div>
+
 					<div class="alert alert-danger alert-nbl" role="alert" ng-hide="nblF.nicotine.$valid">
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span>
-						insert a value between 0 and 100
+						<span class="sr-only">Error:</span> insert a value between 0 and 100
 					</div>
+
 				</li>
+
 			</ul>
+
 			<div class="panel-footer"></div>
+
 		</div>
 	</div>
 
-	<div class="col-xs-12 col-sm-12 col-md-3 lg-3">
+	<div class="col-xs-12 col-sm-6 col-md-3 lg-3">
+
 		<div class="panel panel-primary">
+
 			<div class="panel-heading">
 				<h3 class="panel-title">Target</h3>
 			</div>
+
 			<div class="panel-footer"></div>
+
 		</div>
+
 	</div>
 
-	<div class="col-xs-12 col-sm-12 col-md-3 lg-3">
+	<div class="col-xs-12 col-sm-6 col-md-3 lg-3">
+
 		<div class="panel panel-primary">
+
 			<div class="panel-heading">
+
 				<h3 class="panel-title">Recipe</h3>
 			</div>
+
 			<div class="panel-footer"></div>
 		</div>
+
 	</div>
 
-	<div class="col-xs-12 col-sm-12 col-md-3 lg-3">
+	<div class="col-xs-12 col-sm-6 col-md-3 lg-3">
+
 		<div class="panel panel-primary">
+
 			<div class="panel-heading">
 				<h3 class="panel-title">Final eJuice composition</h3>
 			</div>
+
 			<div class="panel-footer"></div>
+
 		</div>
+
 	</div>
 
 </div>
