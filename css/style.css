@@ -1,3 +1,4 @@
+/* BEGIN nbl, target panel */
 .left-side {
 	width: 76px;
 }
@@ -7,10 +8,46 @@
 	padding-right: 9px;
 }
 
-.alert-nbl {
+.right-side-ml {
+	padding-left: 7.5px;
+	padding-right: 7.5px;
+}
+
+
+.alert-nbl, .alert-target {
 	margin-bottom: 0px;
 	margin-top: 5px;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	font-size: 12px;
 }
+/* END nbl, target panel */
+
+/* BEGIN flavoring panel */
+.radio-td {
+	text-align: center;
+}
+
+.table-flavoring th#percentage {
+	width: 99px;
+}
+
+.table-flavoring th:first-child,
+.table-flavoring td:first-child {
+	padding-left: 15px;
+}
+
+.table-flavoring th:last-child,
+.table-flavoring td:last-child {
+	padding-right: 15px;
+}
+
+.table.table-flavoring > tbody > tr >td {
+	vertical-align: middle;
+}
+
+.input-group-addon.flavor-percentage {
+	padding-left: 6px;
+	padding-right: 6px;
+}
+/* END flavoring panel */
