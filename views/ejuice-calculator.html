@@ -75,7 +75,7 @@
 
 					<div class="alert alert-danger alert-nbl" role="alert" ng-hide="nblF.nicotine.$valid">
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span> insert a value between 0 and 100
+						<span class="sr-only">Error:</span> insert a value bigger than 100
 					</div>
 
 				</li>
@@ -204,55 +204,63 @@
 
 				<thead>
 					<tr>
-						<th>Name</th>
+						<th id="name">Name</th>
 						<th id="percentage">Percentage</th>
-						<th>PG</th>
-						<th>VG</th>
-						<th></th>
+						<th id="pg">PG</th>
+						<th id="vg">VG</th>
+						<th id="add-remove"></th>
 					</tr>
 				</thead>
 
 				<tbody class="flavoring-list">
 
-					<tr ng-form="addFlavorF">
+					<tr ng-form="newFlavorF" ng-class="{'danger' : !newFlavorF.$valid}">
 						<td>
-							<input type="text" class="form-control" name="name" required>
+							<div class="form-group flavor-name" ng-class="{'has-error' : !newFlavorF.name.$valid}">
+								<input type="text" class="form-control" name="name" maxlength="12" ng-model="flavoringP.newFlavor.name" required>
+							</div>
 						</td>
 						<td>
-							<div class="input-group flavor-percentage">
-								<input type="number" class="form-control  text-right" name="percentage" min="0" max="100" step="1" required>
+							<div class="input-group flavor-percentage" ng-class="{'has-error' : !newFlavorF.percentage.$valid}">
+								<input type="number" class="form-control  text-right" name="percentage" min="0" max="100" step="1" ng-model="flavoringP.newFlavor.percentage" required>
 								<div class="input-group-addon flavor-percentage"> % </div>
 							</div>
 						</td>
-						<td class="radio-td">
-							<input type="radio" name="composition" value="PG" checked>
+						<td class="pg-td flavor-pg">
+							<input type="radio" name="composition" value="PG" ng-model="flavoringP.newFlavor.composition">
 						</td>
-						<td class="radio-td">
-							<input type="radio" name="composition" value="VG">
+						<td class="vg-td flavor-vg">
+							<input type="radio" name="composition" value="VG" ng-model="flavoringP.newFlavor.composition">
 						</td>
-						<td>
-							<i class="glyphicon glyphicon-plus text-muted"></i>
+						<td class="add">
+							<button type="button" class="btn btn-default btn-xs" ng-disabled="!newFlavorF.$valid" ng-click="add()">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							</button>
 						</td>
 					</tr>
 
-					<tr ng-form="falvoringF_{{$index}}" ng-repeat="flavor in flavoringP">
+					<tr ng-form="flavoringF" ng-class="{'danger' : !flavoringF.$valid}" ng-repeat="flavor in flavoringP.flavorList">
 						<td>
-							<input type="text" class="form-control" name="name" ng-model="flavor.name" required>
+							<div class="form-group flavor-name" ng-class="{'has-error' : !flavoringF.name.$valid}">
+								<input type="text" class="form-control" name="name" maxlength="12" ng-model="flavor.name" required>
+							</div>
 						</td>
 						<td>
-							<div class="input-group flavor-percentage">
+							<div class="input-group flavor-percentage" ng-class="{'has-error' : !flavoringF.percentage.$valid}">
 								<input type="number" class="form-control  text-right" name="percentage" min="0" max="100" step="1" ng-model="flavor.percentage" required>
 								<div class="input-group-addon flavor-percentage"> % </div>
 							</div>
 						</td>
-						<td class="radio-td">
-							<input type="radio" name="composition_{{$index}}" value="PG" ng-model="flavor.composition" checked>
+						<td class="pg-td">
+							<input type="radio" name="composition_{{$index}}" value="PG" ng-model="flavor.composition">
 						</td>
-						<td class="radio-td">
+						<td class="vg-td">
 							<input type="radio" name="composition_{{$index}}" value="VG" ng-model="flavor.composition">
 						</td>
-						<td>
-							<i class="glyphicon glyphicon-remove text-muted"></i>
+						<td class="remove">
+							<button type="button" class="btn btn-default btn-xs" ng-click="remove($index)">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
 						</td>
 					</tr>
 

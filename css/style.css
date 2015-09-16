@@ -24,8 +24,17 @@
 /* END nbl, target panel */
 
 /* BEGIN flavoring panel */
-.radio-td {
+.pg-td,
+.vg-td,
+.table-flavoring th#pg,
+.table-flavoring th#vg {
 	text-align: center;
+}
+
+.table-flavoring th#add-remove,
+.add,
+.remove {
+	text-align: right;
 }
 
 .table-flavoring th#percentage {
@@ -50,4 +59,17 @@
 	padding-left: 6px;
 	padding-right: 6px;
 }
+
+.form-group {
+	margin-bottom: 0px;
+}
+
+.glyphicon-plus:before {
+    color: #3c763d;
+}
+
+.glyphicon-remove:before {
+	color: #a94442;
+}
+
 /* END flavoring panel */
