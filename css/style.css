@@ -42,12 +42,16 @@
 }
 
 .table-flavoring th:first-child,
-.table-flavoring td:first-child {
+.table-flavoring td:first-child,
+.table-final-ej-recipe th:first-child,
+.table-final-ej-recipe td:first-child {
 	padding-left: 15px;
 }
 
 .table-flavoring th:last-child,
-.table-flavoring td:last-child {
+.table-flavoring td:last-child,
+.table-final-ej-recipe th:last-child,
+.table-final-ej-recipe td:last-child {
 	padding-right: 15px;
 }
 
@@ -71,5 +75,17 @@
 .glyphicon-remove:before {
 	color: #a94442;
 }
-
 /* END flavoring panel */
+
+/*BEGIN final recipe panel*/
+.alert-final-recipe {
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+#total-ml, #total {
+	border-top: 2px solid #ddd;
+	border-bottom: none;
+}
+/*END final recipe panel*/

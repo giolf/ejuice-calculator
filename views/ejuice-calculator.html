@@ -1,4 +1,4 @@
-<div class="row" ng-controller="ejcalc">
+<div class="row" ng-init="count()">
 
 	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 
@@ -14,7 +14,7 @@
 
 					<div class="input-group nbl-input" ng-class="{'has-error' : !nblF.pg.$valid }">
 						<div class="input-group-addon left-side">PG</div>
-						<input type="number" class="form-control text-right" name="pg" min="0" max="100" step="1" ng-model="nblP.pg" required>
+						<input type="number" class="form-control text-right" name="pg" min="0" max="100" step="1" ng-model="nblP.pg" ng-change="count()" required>
 						<div class="input-group-addon">
 							<span class="right-side">%</span>
 						</div>
@@ -31,7 +31,7 @@
 
 					<div class="input-group nbl-input" ng-class="{'has-error' : !nblF.vg.$valid }">
 						<div class="input-group-addon left-side">VG</div>
-						<input type="number" class="form-control text-right" name="vg" min="0" max="100" step="1" ng-model="nblP.vg" required>
+						<input type="number" class="form-control text-right" name="vg" min="0" max="100" step="1" ng-model="nblP.vg" ng-change="count()" required>
 						<div class="input-group-addon">
 							<span class="right-side">%</span>
 						</div>
@@ -48,7 +48,7 @@
 
 					<div class="input-group nbl-input" ng-class="{'has-error' : !nblF.water.$valid }">
 						<div class="input-group-addon left-side">Water</div>
-						<input type="number" class="form-control text-right" name="water" min="0" max="100" step="1" ng-model="nblP.water" required>
+						<input type="number" class="form-control text-right" name="water" min="0" max="100" step="1" ng-model="nblP.water" ng-change="count()" required>
 						<div class="input-group-addon">
 							<span class="right-side">%</span>
 						</div>
@@ -65,7 +65,7 @@
 
 					<div class="input-group nbl-input" ng-class="{'has-error' : !nblF.nicotine.$valid }">
 						<div class="input-group-addon left-side">Nicotine</div>
-						<input type="number" class="form-control text-right" name="nicotine" min="0" max="100" step="1" ng-model="nblP.nicotine" required>
+						<input type="number" class="form-control text-right" name="nicotine" min="0" max="100" step="1" ng-model="nblP.nicotine" ng-change="count()" required>
 						<div class="input-group-addon">
 							<span class="right-side-nicotine">
 								<sup>mg</sup>/<sub>ml</sub>
@@ -101,7 +101,7 @@
 
 					<div class="input-group target-input" ng-class="{'has-error' : !targetF.amount.$valid }">
 						<div class="input-group-addon left-side">Amount</div>
-						<input type="number" class="form-control text-right" name="amount" min="0" step="1" ng-model="targetP.amount" required>
+						<input type="number" class="form-control text-right" name="amount" min="0" step="1" ng-model="targetP.amount" ng-change="count()" required>
 						<div class="input-group-addon">
 							<span class="right-side-ml">ml</span>
 						</div>
@@ -118,7 +118,7 @@
 
 					<div class="input-group target-input" ng-class="{'has-error' : !targetF.nicotine.$valid }">
 						<div class="input-group-addon left-side">Nicotine</div>
-						<input type="number" class="form-control text-right" name="nicotine" min="0" step="1" ng-model="targetP.nicotine" required>
+						<input type="number" class="form-control text-right" name="nicotine" min="0" max="{{nblP.nicotine}}" step="1" ng-model="targetP.nicotine" ng-change="count()" required>
 						<div class="input-group-addon">
 							<span class="right-side-nicotine">
 								<sup>mg</sup>/<sub>ml</sub>
@@ -128,7 +128,7 @@
 
 					<div class="alert alert-danger alert-target" role="alert" ng-hide="targetF.nicotine.$valid">
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span> insert a value bigger than 100
+						<span class="sr-only">Error:</span> insert a value between 0 and {{nblP.nicotine}}
 					</div>
 
 				</li>
@@ -137,7 +137,7 @@
 
 					<div class="input-group target-input" ng-class="{'has-error' : !targetF.pg.$valid }">
 						<div class="input-group-addon left-side">PG</div>
-						<input type="number" class="form-control text-right" name="pg" min="0" max="100" step="1" ng-model="targetP.pg" required>
+						<input type="number" class="form-control text-right" name="pg" min="{{(ferP.nblML / targetP.amount)*nblP.pg | number:2}}" max="100" step="1" ng-model="targetP.pg" ng-change="count()" required>
 						<div class="input-group-addon">
 							<span class="right-side">%</span>
 						</div>
@@ -145,7 +145,7 @@
 
 					<div class="alert alert-danger alert-target" role="alert" ng-hide="targetF.pg.$valid">
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span> insert a value between 0 and 100
+						<span class="sr-only">Error:</span> insert a value between {{(ferP.nblML / targetP.amount)*nblP.pg | number:2}} and 100
 					</div>
 
 				</li>
@@ -154,7 +154,7 @@
 
 					<div class="input-group target-input" ng-class="{'has-error' : !targetF.vg.$valid }">
 						<div class="input-group-addon left-side">VG</div>
-						<input type="number" class="form-control text-right" name="vg" min="0" max="100" step="1" ng-model="targetP.vg" required>
+						<input type="number" class="form-control text-right" name="vg" min="{{(ferP.nblML / targetP.amount)*nblP.vg | number:2}}" max="100" step="1" ng-model="targetP.vg" ng-change="count()" required>
 						<div class="input-group-addon">
 							<span class="right-side">%</span>
 						</div>
@@ -171,7 +171,7 @@
 
 					<div class="input-group target-input" ng-class="{'has-error' : !targetF.water.$valid }">
 						<div class="input-group-addon left-side">Water</div>
-						<input type="number" class="form-control text-right" name="water" min="0" max="100" step="1" ng-model="targetP.water" required>
+						<input type="number" class="form-control text-right" name="water" min="{{(ferP.nblML / targetP.amount)*nblP.water | number:2}}" max="100" step="1" ng-model="targetP.water" ng-change="count()" required>
 						<div class="input-group-addon">
 							<span class="right-side">%</span>
 						</div>
@@ -179,7 +179,7 @@
 
 					<div class="alert alert-danger alert-target" role="alert" ng-hide="targetF.water.$valid">
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span> insert a value between 0 and 100
+						<span class="sr-only">Error:</span> insert a value between {{(ferP.nblML / targetP.amount)*nblP.water | number:2}} and 100
 					</div>
 
 				</li>
@@ -199,7 +199,7 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">Flavoring</h3>
 			</div>
-
+			
 			<table class="table table-condensed table-flavoring">
 
 				<thead>
@@ -214,14 +214,14 @@
 
 				<tbody class="flavoring-list">
 
-					<tr ng-form="newFlavorF" ng-class="{'danger' : !newFlavorF.$valid}">
+					<tr ng-form="newFlavorF">
 						<td>
-							<div class="form-group flavor-name" ng-class="{'has-error' : !newFlavorF.name.$valid}">
-								<input type="text" class="form-control" name="name" maxlength="12" ng-model="flavoringP.newFlavor.name" required>
+							<div class="form-group flavor-name">
+								<input type="text" class="form-control" name="name" maxlength="12" ng-model="flavoringP.newFlavor.name" placeholder="Flavor name">
 							</div>
 						</td>
 						<td>
-							<div class="input-group flavor-percentage" ng-class="{'has-error' : !newFlavorF.percentage.$valid}">
+							<div class="input-group flavor-percentage" ng-class="{'has-error' : newFlavorF.percentage.$invalid && !newFlavorF.percentage.$pristine}">
 								<input type="number" class="form-control  text-right" name="percentage" min="0" max="100" step="1" ng-model="flavoringP.newFlavor.percentage" required>
 								<div class="input-group-addon flavor-percentage"> % </div>
 							</div>
@@ -233,29 +233,29 @@
 							<input type="radio" name="composition" value="VG" ng-model="flavoringP.newFlavor.composition">
 						</td>
 						<td class="add">
-							<button type="button" class="btn btn-default btn-xs" ng-disabled="!newFlavorF.$valid" ng-click="add()">
+							<button type="button" class="btn btn-default btn-xs" ng-disabled="newFlavorF.$invalid" ng-click="add()">
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 							</button>
 						</td>
 					</tr>
 
-					<tr ng-form="flavoringF" ng-class="{'danger' : !flavoringF.$valid}" ng-repeat="flavor in flavoringP.flavorList">
+					<tr ng-form="flavoringF" ng-repeat="flavor in flavoringP.flavorList">
 						<td>
-							<div class="form-group flavor-name" ng-class="{'has-error' : !flavoringF.name.$valid}">
-								<input type="text" class="form-control" name="name" maxlength="12" ng-model="flavor.name" required>
+							<div class="form-group flavor-name">
+								<input type="text" class="form-control" name="name" maxlength="15" ng-model="flavor.name">
 							</div>
 						</td>
 						<td>
 							<div class="input-group flavor-percentage" ng-class="{'has-error' : !flavoringF.percentage.$valid}">
-								<input type="number" class="form-control  text-right" name="percentage" min="0" max="100" step="1" ng-model="flavor.percentage" required>
+								<input type="number" class="form-control  text-right" name="percentage" min="0" max="100" step="1" ng-model="flavor.percentage" ng-change="count()" required>
 								<div class="input-group-addon flavor-percentage"> % </div>
 							</div>
 						</td>
 						<td class="pg-td">
-							<input type="radio" name="composition_{{$index}}" value="PG" ng-model="flavor.composition">
+							<input type="radio" name="composition_{{$index}}" value="PG" ng-model="flavor.composition" disabled="disabled">
 						</td>
 						<td class="vg-td">
-							<input type="radio" name="composition_{{$index}}" value="VG" ng-model="flavor.composition">
+							<input type="radio" name="composition_{{$index}}" value="VG" ng-model="flavor.composition" disabled="disabled">
 						</td>
 						<td class="remove">
 							<button type="button" class="btn btn-default btn-xs" ng-click="remove($index)">
@@ -279,8 +279,53 @@
 		<div class="panel panel-primary">
 
 			<div class="panel-heading">
-				<h3 class="panel-title">Final eJuice composition</h3>
+				<h3 class="panel-title">Final eJuice recipe</h3>
 			</div>
+			<div class="alert alert-danger alert-target alert-final-recipe" ng-show="ferP.pgML < 0 || ferP.vgML < 0 || ferP.totalML != 10">
+				This mix is not feasible. You may need to lower your target nic, VG or PG content, or flavoring. 
+				Alternatively, use a stronger nic base liquid, or a nic base liquid with a different VG/PG ratio. 
+				Please adjust your settings.
+			</div>
+			<table class="table table-striped table-final-ej-recipe">
+				
+				<thead>
+					<tr>
+						<th id="ingredients">Ingredients</th>
+						<th id="ml" class="text-right">ml</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr>
+						<td>Nicotine base liquid</td>
+						<td class="text-right">{{ferP.nblML | number:2}}</td>
+					</tr>
+					<tr ng-class="{'danger' : ferP.pgML < 0}">
+						<td>PG</td>
+						<td class="text-right">{{ferP.pgML | number:2}}</td>
+					</tr>
+					<tr ng-class="{'danger' : ferP.vgML < 0}">
+						<td>VG</td>
+						<td class="text-right">{{ferP.vgML | number:2}}</td>
+					</tr>
+					<tr>
+						<td>Water</td>
+						<td class="text-right">{{ferP.waterML | number:2}}</td>
+					</tr>
+					<tr ng-repeat="flavor in flavoringP.flavorList">
+						<td><i>{{flavor.name}} - {{flavor.composition}}</i></td>
+						<td class="text-right">{{flavor.ml | number:2}}</td>
+					</tr>
+				</tbody>
+				
+				<thead>
+					<tr ng-class="{'danger' : ferP.totalML != 10}">
+						<th id="total">Total</th>
+						<th class="text-right" id="total-ml">{{ferP.totalML | number:2}}</th>
+					</tr>
+				</thead>
+				
+			</table>
 
 			<div class="panel-footer"></div>
 
