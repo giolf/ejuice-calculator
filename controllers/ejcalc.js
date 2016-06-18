@@ -107,5 +107,9 @@ angular.module('app-ejcalc')
 				scope.ferP.totalML += flavor.ml;
 			});
 			// END count total ml final recipe
+			
+			console.log("totalML: ", scope.ferP.totalML);
+			console.log("totaVG ML: ", scope.ferP.vgML);
+			console.log("totalPG ML: ", scope.ferP.pgML);
 		}
 	}]);
