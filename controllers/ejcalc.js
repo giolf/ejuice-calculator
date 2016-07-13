@@ -35,6 +35,13 @@ angular.module('app-ejcalc')
 			waterML 	: ''
 		};
 		
+		        /**
+         * Round a number to n digits
+         */
+        var round = function(number, n) {
+            return Math.round(number * n) / n;
+        };
+		
 		scope.add = function() {
 			
 			if(scope.flavoringP.newFlavor.name == '')
@@ -107,6 +114,8 @@ angular.module('app-ejcalc')
 				scope.ferP.totalML += flavor.ml;
 			});
 			// END count total ml final recipe
+			
+			scope.ferP.totalML = round(scope.ferP.totalML, 1e4);
 			
 			console.log("totalML: ", scope.ferP.totalML);
 			console.log("totaVG ML: ", scope.ferP.vgML);
